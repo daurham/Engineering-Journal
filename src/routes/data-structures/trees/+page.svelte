@@ -2,11 +2,11 @@
 	import { CodeBlock } from '$lib';
 
 	const screenConfiguration = {
-		title: 'Linked Lists',
+		title: 'Trees',
 		subtitle: 'What is it and when to use it.',
-		img: '.././linked-list.png',
-		description:
-			'A linked list is a linear data structure where elements are stored in nodes linked via pointers. Unlike arrays, linked lists allow dynamic memory allocation and efficient insertions/deletions.'
+		// img: '.././linked-list.png', // <- Example
+		img: '',
+		description: 'A Tree is..'
 	};
 
 	const codeSnippets = [
@@ -14,12 +14,12 @@
 			tabName: 'PseudoClassical (JS)',
 			language: 'javascript',
 			code: `
-const Node = function(data) {
-  this.data = data;
-  this.next = null;
+const TreeNode = function(data) {
+  this.value = data.value;
+  this.children = data.children | null;
 };
 
-const LinkedList = function(data) {
+const Tree = function(data) {
   this.head = null;
   this.length = 0;
 
@@ -29,21 +29,21 @@ const LinkedList = function(data) {
   }
 };
 
-LinkedList.prototype.addValues = function(arrayOfValues) {...}
+Tree.prototype.addChildren = function(arrayOfValues) {...}
 `
 		},
 		{
 			tabName: 'Classical (JS)',
 			language: 'javascript',
 			code: `
-class Node {
+class TreeNode {
   constructor(value) {
     this.value = value;
     this.next = null;
   }
 }
 
-class LinkedList {
+class Tree {
   constructor() {
     this.head = null;
   }
@@ -63,18 +63,24 @@ class LinkedList {
 `
 		}
 	];
+
+		const codeSnippets2 = [
+	  { tabName: 'HTML', language: 'html', code: '<div>Hello World</div>' },
+	  { tabName: 'JavaScript', language: 'javascript', code: 'console.log("Hello World");' },
+	  { tabName: 'CSS', language: 'css', code: 'body { background-color: #f0f0f0; }' }
+	];
 </script>
 
 <div class="page">
 	<h1>{screenConfiguration.title}</h1>
-
 	<h3>{screenConfiguration.subtitle}</h3>
 
 	{#if screenConfiguration.img}
 		<img src={screenConfiguration.img} alt={screenConfiguration.title} class="img" />
 	{/if}
-
+	
 	<p>{screenConfiguration.description}</p>
-
 	<CodeBlock {codeSnippets} />
+	
+	<CodeBlock codeSnippets={codeSnippets2} />
 </div>

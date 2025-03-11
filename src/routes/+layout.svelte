@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '../app.css';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { derived } from 'svelte/store';
@@ -20,7 +21,7 @@
 		</div>
 		
 		<div class="nav-center">
-			<button on:click={navigateHome} class="home-btn">Algo Mastery</button>
+			<button on:click={navigateHome} class="home-btn">{$isHome ? "" : "Engineering Journal"}</button>
 		</div>
 
 		<div class="nav-right">

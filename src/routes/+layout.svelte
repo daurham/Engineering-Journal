@@ -3,33 +3,31 @@
 	import { page } from '$app/stores';
 	import { derived } from 'svelte/store';
 
-
-
-	// Dynamically determine page title
-	const pageTitle = derived(page, ($page) =>
-		$page.url.pathname === '/' ? 'Algo Mastery' : 'Home'
-	);
+	// Check if the user is on the home page
+	const isHome = derived(page, ($page) => $page.url.pathname === '/');
 
 	const navigateHome = () => goto('/');
+
+	const someFutureAction = () => console.log("Nothing yet");
 </script>
 
 <div class="layout-container">
 	<header class="navbar">
-		{#if $pageTitle !== "Algo Mastery"}
-			<button on:click={navigateHome} class="back-btn">
-				{"< Back"}
-			</button>
-		{/if}
-		<button on:click={navigateHome}>
-			{$pageTitle}
-		</button>
+		<div class="nav-left">
+			{#if !$isHome}
+				<button on:click={() => history.back()} class="back-btn">{"< Back"}</button>
+			{/if}
+		</div>
+		
+		<div class="nav-center">
+			<button on:click={navigateHome} class="home-btn">Algo Mastery</button>
+		</div>
 
-		{#if $pageTitle !== "Algo Mastery"}
-		<button on:click={navigateHome} class="back-btn">
-			
-		</button>
-	{/if}
+		<div class="nav-right">
+			<!-- Placeholder for future content -->
+			<button class="settings-btn" on:click={someFutureAction}>⚙️</button>
 
+		</div>
 	</header>
 
 	<main>
@@ -44,22 +42,35 @@
 		align-items: center;
 	}
 
-	.back-btn {
-		float: left;
-	}
-
 	.navbar {
 		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 		padding: 1rem;
 		background: #333;
 		color: white;
-		text-align: center;
 		position: sticky;
 		top: 0;
 		z-index: 1000;
 	}
 
-	.navbar button {
+	.nav-left,
+	.nav-right {
+		width: 100px; /* Ensures equal spacing */
+		display: flex;
+		justify-content: center;
+	}
+
+	.nav-center {
+		flex-grow: 1;
+		display: flex;
+		justify-content: center;
+	}
+
+	.back-btn,
+	.home-btn,
+	.settings-btn {
 		background: none;
 		border: none;
 		color: white;
@@ -67,13 +78,8 @@
 		cursor: pointer;
 	}
 
-	.navbar button:hover {
+	.back-btn:hover,
+	.home-btn:hover {
 		text-decoration: underline;
-	}
-
-	main {
-		width: 100%;
-		max-width: 1200px;
-		padding: 1rem;
 	}
 </style>

@@ -4,14 +4,17 @@
   export let desc;
   export let id;
   export let type: "algorithm" | "data-structure" | "concept";
+  export let unlocked: boolean;
 
   let borderColor = "";
   if (type === "data-structure") borderColor = "#275e39"; 
   if (type === "algorithm") borderColor = "#27435e"; 
   if (type === "concept") borderColor = "#c29e0f"; // or #5e5527
+
+  let className = unlocked ? "card" : "locked-card";
 </script>
 
-<a href={url} class="card" style="border: 2px solid {borderColor};">
+<a href={unlocked ? url : ""} class={className} style="border: 2px solid {borderColor};">
   {#if img}
     <img src={img} alt="Card image" class="card-img" />
   {/if}
@@ -33,6 +36,19 @@
   }
   .card:hover {
     transform: scale(1.05);
+  }
+  .locked-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    /* border: 1px solid #5e5527; */
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    /* transition: transform 0.2s ease-in-out; */
+    background: rgba(109, 109, 109, 0.5);
+    cursor: default;
   }
   .card-img {
     width: 100%;

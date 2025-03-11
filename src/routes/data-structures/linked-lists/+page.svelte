@@ -9,7 +9,7 @@
   const screenConfiguration = {
     title: "Linked Lists",
     subtitle: "",
-    img: "",
+    img: ".././linked-list.png",
     description: "A linked list is a linear data structure where elements are stored in nodes linked via pointers. Unlike arrays, linked lists allow dynamic memory allocation and efficient insertions/deletions.",
   };
 
